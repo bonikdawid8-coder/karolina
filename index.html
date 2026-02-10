@@ -10,13 +10,13 @@
       height: 100vh;
       background: #ffffff;
       font-family: Georgia, serif;
-      color: #333;
+      color: #222;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       overflow: hidden;
-      transition: background 1.8s ease;
+      transition: background 2s ease;
     }
 
     body.revealed {
@@ -26,22 +26,22 @@
     .container {
       max-width: 760px;
       padding: 50px 30px;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.97);
       border-radius: 32px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.08);
       text-align: center;
       position: relative;
       z-index: 10;
-      transition: all 1.2s ease;
+      transition: background 1.5s ease, box-shadow 1.5s ease;
     }
 
     h1.big-name {
-      font-size: 6rem;
+      font-size: 6.5rem;
       margin: 0 0 30px;
       font-weight: 800;
-      color: #222;
-      letter-spacing: -3px;
-      transition: color 1.8s ease;
+      letter-spacing: -4px;
+      color: #111;
+      transition: color 2s ease;
     }
 
     body.revealed h1.big-name {
@@ -49,8 +49,8 @@
     }
 
     #reveal-btn {
-      font-size: 1.5rem;
-      padding: 18px 60px;
+      font-size: 1.6rem;
+      padding: 18px 70px;
       background: #e91e63;
       color: white;
       border: none;
@@ -58,7 +58,6 @@
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
       transition: all 0.4s;
-      margin: 30px 0;
     }
 
     #reveal-btn:hover {
@@ -68,8 +67,8 @@
 
     #full-content {
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1.6s ease-out 0.3s, transform 1.6s ease-out 0.3s;
+      transform: translateY(60px);
+      transition: opacity 1.8s ease-out 0.4s, transform 1.8s ease-out 0.4s;
       pointer-events: none;
     }
 
@@ -81,8 +80,8 @@
 
     .subtitle {
       color: #c2185b;
-      font-size: 1.9rem;
-      margin: 0 0 40px;
+      font-size: 2rem;
+      margin: 0 0 45px;
       font-style: italic;
     }
 
@@ -120,14 +119,14 @@
       max-width: 520px;
     }
 
-    /* Spadające serduszka – ukryte na starcie */
+    /* Spadające serduszka – na starcie ukryte */
     .hearts {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 5;
       opacity: 0;
-      transition: opacity 1.2s ease;
+      transition: opacity 1.5s ease;
     }
 
     body.revealed .hearts {
@@ -210,14 +209,14 @@ A teraz kup mi kebaba mieszany mieszany <3
 </div>
 
 <script>
-// Spadające serduszka (startują dopiero po odkryciu)
+// Funkcja tworząca serduszka
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
   heart.innerHTML = ['❤️','💞','💕','🩷','💘','💝','💗'][Math.floor(Math.random()*7)];
   heart.style.left = Math.random() * 98 + 'vw';
   heart.style.top = '-20vh';
-  const duration = Math.random() * 8 + 10;
+  const duration = Math.random() * 8 + 10; // 10–18 sekund
   const size = Math.random() * 1.5 + 1.2;
   heart.style.fontSize = size + 'rem';
   heart.style.animationDuration = duration + 's';
@@ -226,20 +225,23 @@ function createHeart() {
   setTimeout(() => heart.remove(), duration * 1000 + 2000);
 }
 
-// Przycisk – zmienia wszystko
+// Obsługa przycisku
 document.getElementById('reveal-btn').addEventListener('click', function() {
+  // zmiana tła
   document.body.classList.add('revealed');
+
+  // pokazanie treści
   document.getElementById('full-content').classList.add('visible');
-  
-  // chowamy przycisk
+
+  // ukrycie i usunięcie przycisku
   this.style.opacity = '0';
   this.style.pointerEvents = 'none';
-  setTimeout(() => this.remove(), 1000);
+  setTimeout(() => this.remove(), 1200);
 
-  // startujemy serduszka po 0.6 s
+  // start animacji serduszek po lekkim opóźnieniu
   setTimeout(() => {
     setInterval(createHeart, Math.random() * 350 + 200);
-  }, 600);
+  }, 800);
 });
 </script>
 
