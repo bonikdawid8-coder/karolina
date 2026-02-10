@@ -3,46 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dla Karoliny ♡</title>
+  <title>Dla Karoliny ♡ Walentynki</title>
   <style>
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(to bottom, #fff5f7, #ffe4e9);
-      font-family: 'Georgia', serif;
-      color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      background: linear-gradient(135deg, #fff0f5, #ffe4e9, #ffccd5);
+      font-family: Georgia, serif;
+      color: #4a2c3b;
+      overflow: hidden;
+      position: relative;
     }
-    .box {
+
+    .container {
       max-width: 720px;
-      background: white;
+      margin: 40px auto;
       padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 24px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      border: 2px solid rgba(233, 30, 99, 0.25);
+      position: relative;
+      z-index: 10;
       text-align: center;
     }
+
     h1 {
+      color: #c2185b;
+      font-size: 3.6rem;
+      margin: 0 0 20px;
+      font-weight: 600;
+    }
+
+    .subtitle {
       color: #e91e63;
-      font-size: 3.2rem;
+      font-size: 1.6rem;
       margin: 0 0 30px;
     }
-    .poem {
-      font-size: 1.35rem;
-      line-height: 1.9;
+
+    .wiersz {
+      font-size: 1.32rem;
+      line-height: 1.95;
       white-space: pre-line;
+      color: #333;
     }
-    .heart { color: #e91e63; font-size: 1.8rem; }
+
+    .serce {
+      color: #d81b60;
+      font-size: 2.2rem;
+      margin: 0 6px;
+    }
+
+    /* Spadające serduszka */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.8rem;
+      user-select: none;
+      animation: fall linear forwards;
+      will-change: transform, opacity;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-120vh) rotate(0deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(120vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="box">
-  <h1>Karolina</h1>
-  
-  <div class="poem">
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+  <h1>Karolina <span class="serce">❤️</span></h1>
+  <div class="subtitle">Walentynki 2026 ♡</div>
+
+  <div class="wiersz">
 Gdy patrzę na Ciebie, Karolino moja,  
 świat zwalnia, kolory robią się żywsze.  
 Twoje oczy – dwa małe, ciepłe ogniska,  
@@ -53,17 +105,48 @@ jak cicha melodia, co gra tylko dla mnie.
 Karolina – samo to słowo wystarczy,  
 że serce zaczyna pisać własne wiersze.
 
-Nie obiecuję gwiazd z nieba,  
+Nie obiecuję Ci gwiazd z nieba,  
 bo pewnie i tak by spadły i zgasły.  
-Obiecuję za to być przy Tobie zawsze –  
-gdy pada deszcz, gdy świeci słońce jasne.
+Obiecuję za to być przy Tobie wtedy,  
+gdy będzie padać, gdy będzie za jasno.
 
-Gdy się śmiejesz – śmieję się głośniej,  
-gdy płaczesz – łzy zabieram na siebie.  
-Kocham Cię, Karolino, tak zwyczajnie,  
-całym sobą, bez końca, bezwarunkowo.<span class="heart"> ♡</span>
+Gdy będziesz śmiać się – będę się śmiać głośniej,  
+gdy będziesz płakać – wezmę Twoje łzy na siebie.  
+Bo kocham Cię, Karolino, tak po prostu,  
+całym sobą, bezwarunkowo, na zawsze.<span class="serce">💕</span>
   </div>
 </div>
+
+<script>
+// Spadające serduszka
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = ['❤️','💖','💕','💗','🩷','💘'][Math.floor(Math.random()*6)];
+  
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.top = '-10vh';
+  
+  // losowa prędkość i rozmiar
+  const duration = Math.random() * 8 + 10; // 10–18 sekund
+  const size = Math.random() * 1.2 + 0.8;   // 0.8–2.0 rem
+  heart.style.fontSize = size + 'rem';
+  heart.style.animationDuration = duration + 's';
+  
+  // lekkie przesunięcie boczne
+  heart.style.transform = `translateX(${Math.random() * 40 - 20}px)`;
+  
+  document.getElementById('hearts').appendChild(heart);
+  
+  // usuwamy po zakończeniu animacji
+  setTimeout(() => {
+    heart.remove();
+  }, duration * 1000 + 1000);
+}
+
+// Tworzymy nowe serduszko co 300–800 ms
+setInterval(createHeart, Math.random() * 500 + 300);
+</script>
 
 </body>
 </html>
