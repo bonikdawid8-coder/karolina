@@ -60,7 +60,18 @@
       40% { transform: scale(1.25); }
     }
 
-    /* Spadające serduszka – bez zmian */
+    .kebab-line {
+      font-size: 1.5rem;
+      margin-top: 35px;
+      padding: 15px;
+      background: rgba(255, 87, 34, 0.15);
+      border-radius: 16px;
+      border: 2px dashed #ff5722;
+      color: #d32f2f;
+      font-weight: bold;
+    }
+
+    /* Spadające serduszka */
     .hearts {
       position: fixed;
       inset: 0;
@@ -133,11 +144,15 @@ WHUJ.
 Na maksa.  
 Na zawsze.  
 <span class="serce">💋</span> Twój debil nr 1.
+
+<div class="kebab-line">
+A teraz kup mi kebaba mieszany mieszany 😏
+</div>
   </div>
 </div>
 
 <script>
-// Spadające serduszka (lekko szybsze i więcej)
+// Spadające serduszka (bez zmian)
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -146,7 +161,7 @@ function createHeart() {
   heart.style.left = Math.random() * 98 + 'vw';
   heart.style.top = '-15vh';
   
-  const duration = Math.random() * 7 + 9; // 9–16 s
+  const duration = Math.random() * 7 + 9;
   const size = Math.random() * 1.4 + 1;
   heart.style.fontSize = size + 'rem';
   heart.style.animationDuration = duration + 's';
