@@ -167,7 +167,7 @@ Jesteś jak mem, który zawsze mnie rozbawi,
 tylko że ten mem ma zapach Twoich włosów i potrafi mnie przytulić tak,
 że zapominam, jak się nazywam przez 17 sekund.
 <span class="serce">💖</span> A potem wracasz do rzeczywistości i mówisz:
-„Dawid, oddaj pilota, bo znowu oglądasz te swoje śmieszne koty” –
+„Dawid, oddaj pilota, bo znowu oglądasz te swoje śmieszne koty” – 
 i nawet to jest zajebiste.
 
 Nie będę Ci obiecywał księżyca, bo po co komu księżyc, jak jest zimny i daleko.
@@ -208,7 +208,7 @@ A teraz kup mi kebaba mieszany mieszany <3
 </div>
 
 <script>
-// tworzenie serduszka
+// funkcja tworząca serduszko
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -227,18 +227,15 @@ function createHeart() {
 // kliknięcie przycisku
 document.getElementById('reveal-btn').addEventListener('click', function() {
   document.body.classList.add('revealed');
-
   document.getElementById('full-content').classList.add('visible');
 
-  // chowamy przycisk
-  this.style.opacity = '0';
-  this.style.pointerEvents = 'none';
-  setTimeout(() => this.remove(), 1500);
+  // przycisk znika od razu
+  this.style.display = 'none';
 
-  // startujemy serduszka po 1 sekundzie
+  // startujemy serduszka po 0.5s
   setTimeout(() => {
-    setInterval(createHeart, Math.random() * 400 + 250);
-  }, 1000);
+    setInterval(createHeart, 350);
+  }, 500);
 });
 </script>
 
