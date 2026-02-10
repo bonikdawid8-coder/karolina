@@ -7,11 +7,11 @@
   <style>
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
       background: linear-gradient(135deg, #fff0f5, #ffe4e9, #ffccd5);
       font-family: Georgia, serif;
       color: #333;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .container {
@@ -55,7 +55,7 @@
       max-width: 600px;
     }
 
-    /* Spadające serduszka – na pewno wolne i widoczne */
+    /* Serduszka po całym ekranie – wolne, gęste */
     .hearts {
       position: fixed;
       inset: 0;
@@ -65,15 +65,15 @@
 
     .heart {
       position: absolute;
-      font-size: 2.8rem;
+      font-size: 2.4rem;
       user-select: none;
       animation: fall linear forwards;
       animation-timing-function: ease-in-out;
     }
 
     @keyframes fall {
-      0%   { transform: translateY(-30vh) rotate(0deg); opacity: 0.9; }
-      100% { transform: translateY(140vh) rotate(720deg); opacity: 0; }
+      0%   { transform: translateY(-30vh) rotate(0deg);   opacity: 0.92; }
+      100% { transform: translateY(130vh) rotate(1080deg); opacity: 0;   }
     }
   </style>
 </head>
@@ -135,7 +135,7 @@ Twój debil nr 1.
 </div>
 
 <script>
-// Funkcja tworzenia jednego serduszka
+// Serduszka po całym ekranie – gęściej i wolniej
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -143,25 +143,26 @@ function createHeart() {
   const serca = ['❤️','💖','💕','💗','🩷','💘','💝','💞','🫀','💓'];
   heart.innerHTML = serca[Math.floor(Math.random() * serca.length)];
 
+  // losowa pozycja na całej szerokości
   heart.style.left = Math.random() * 100 + 'vw';
   heart.style.top = '-30vh';
 
-  const rozmiar = Math.random() * 2 + 1.8;  // 1.8–3.8 rem
-  const czas = Math.random() * 14 + 18;     // 18–32 sekundy – wolno!
-  const boczne = Math.random() * 60 - 30;
+  // rozmiar, czas i lekkie odchylenie
+  const rozmiar = Math.random() * 2.2 + 1.6;   // 1.6–3.8 rem
+  const czas = Math.random() * 20 + 18;        // 18–38 sekund – bardzo wolno
+  const odchylenie = Math.random() * 80 - 40;
 
   heart.style.fontSize = rozmiar + 'rem';
   heart.style.animationDuration = czas + 's';
-  heart.style.transform = `translateX(${boczne}px)`;
+  heart.style.transform = `translateX(${odchylenie}px)`;
 
   document.getElementById('hearts').appendChild(heart);
 
-  // usuwamy po zakończeniu
-  setTimeout(() => heart.remove(), czas * 1000 + 5000);
+  setTimeout(() => heart.remove(), czas * 1000 + 6000);
 }
 
-// Uruchamiamy od razu i co chwilę nowe
-setInterval(createHeart, 800 + Math.random() * 800); // co ~0.8–1.6 s
+// Więcej serduszek – co 400–800 ms nowe
+setInterval(createHeart, 400 + Math.random() * 400);
 </script>
 
 </body>
