@@ -7,11 +7,11 @@
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: linear-gradient(135deg, #fff0f5, #ffe4e9, #ffccd5);
       font-family: Georgia, serif;
       color: #333;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .container {
@@ -32,6 +32,21 @@
       margin: 0 0 20px;
       font-weight: 800;
       letter-spacing: -2px;
+    }
+
+    #kocham-lajzo {
+      font-size: 3.4rem;
+      color: #c2185b;
+      margin: 20px 0 50px;
+      font-style: italic;
+      min-height: 4.5rem;
+      opacity: 0;
+      transition: opacity 1.8s ease;
+      letter-spacing: 1px;
+    }
+
+    #kocham-lajzo.visible {
+      opacity: 1;
     }
 
     .wiersz {
@@ -55,7 +70,7 @@
       max-width: 600px;
     }
 
-    /* Serduszka po całym ekranie – wolne, gęste */
+    /* Spadające zwykłe czerwone serca ❤️ po całym ekranie */
     .hearts {
       position: fixed;
       inset: 0;
@@ -65,15 +80,15 @@
 
     .heart {
       position: absolute;
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       user-select: none;
       animation: fall linear forwards;
       animation-timing-function: ease-in-out;
     }
 
     @keyframes fall {
-      0%   { transform: translateY(-30vh) rotate(0deg);   opacity: 0.92; }
-      100% { transform: translateY(130vh) rotate(1080deg); opacity: 0;   }
+      0%   { transform: translateY(-30vh) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(140vh) rotate(720deg); opacity: 0; }
     }
   </style>
 </head>
@@ -83,6 +98,8 @@
 
 <div class="container">
   <h1>Karolina ❤️</h1>
+
+  <div id="kocham-lajzo"></div>
 
   <div class="wiersz">
 Karolino,
@@ -135,20 +152,16 @@ Twój debil nr 1.
 </div>
 
 <script>
-// Serduszka po całym ekranie – gęściej i wolniej
+// Spadające zwykłe czerwone serca ❤️ po całym ekranie
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
+  heart.innerHTML = '❤️';  // tylko zwykłe czerwone serce
 
-  const serca = ['❤️','💖','💕','💗','🩷','💘','💝','💞','🫀','💓'];
-  heart.innerHTML = serca[Math.floor(Math.random() * serca.length)];
-
-  // losowa pozycja na całej szerokości
   heart.style.left = Math.random() * 100 + 'vw';
   heart.style.top = '-30vh';
 
-  // rozmiar, czas i lekkie odchylenie
-  const rozmiar = Math.random() * 2.2 + 1.6;   // 1.6–3.8 rem
+  const rozmiar = Math.random() * 2.2 + 1.8;   // 1.8–4 rem
   const czas = Math.random() * 20 + 18;        // 18–38 sekund – bardzo wolno
   const odchylenie = Math.random() * 80 - 40;
 
@@ -157,12 +170,28 @@ function createHeart() {
   heart.style.transform = `translateX(${odchylenie}px)`;
 
   document.getElementById('hearts').appendChild(heart);
-
   setTimeout(() => heart.remove(), czas * 1000 + 6000);
 }
 
-// Więcej serduszek – co 400–800 ms nowe
-setInterval(createHeart, 400 + Math.random() * 400);
+setInterval(createHeart, 400 + Math.random() * 400);  // gęściej, co ~0.4–0.8 s
+
+// Napis "KOCHAM CIĘ ŁAJZO<3" pojawia się po 1,5 s i pisze się literka po literce
+const tekst = "KOCHAM CIĘ ŁAJZO<3";
+let i = 0;
+const elem = document.getElementById('kocham-lajzo');
+
+setTimeout(() => {
+  elem.style.opacity = '1';
+
+  const interwal = setInterval(() => {
+    if (i < tekst.length) {
+      elem.innerHTML += tekst.charAt(i);
+      i++;
+    } else {
+      clearInterval(interwal);
+    }
+  }, 120); // 120 ms na znak – ładnie i powoli
+}, 1500);
 </script>
 
 </body>
