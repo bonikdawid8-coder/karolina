@@ -17,10 +17,10 @@
     .container {
       max-width: 820px;
       margin: 40px auto;
-      padding: 40px 30px;
-      background: rgba(255,255,255,0.92);
-      border-radius: 28px;
-      box-shadow: 0 12px 50px rgba(0,0,0,0.12);
+      padding: 50px 35px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 32px;
+      box-shadow: 0 14px 60px rgba(0,0,0,0.12);
       text-align: center;
       position: relative;
       z-index: 10;
@@ -28,53 +28,61 @@
 
     h1 {
       color: #b71c1c;
-      font-size: 5.2rem;
-      margin: 0 0 30px;
+      font-size: 5.4rem;
+      margin: 0 0 20px;
       font-weight: 800;
       letter-spacing: -2px;
     }
 
-    .subtitle {
+    #kocham {
       color: #c2185b;
-      font-size: 2rem;
+      font-size: 2.6rem;
       margin: 0 0 40px;
       font-style: italic;
+      min-height: 3.5rem;
+      letter-spacing: 1px;
     }
 
     .wiersz {
-      font-size: 1.38rem;
-      line-height: 2.1;
+      font-size: 1.42rem;
+      line-height: 2.15;
       white-space: pre-wrap;
       text-align: left;
       max-width: 720px;
-      margin: 0 auto 40px;
+      margin: 0 auto 50px;
     }
 
     .serce {
       color: #d81b60;
-      font-size: 2.5rem;
-      margin: 0 8px;
-      animation: beat 2s infinite;
+      font-size: 2.6rem;
+      margin: 0 10px;
+      animation: beat 2.2s infinite;
     }
 
     @keyframes beat {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.18); }
+      50% { transform: scale(1.16); }
     }
 
     .kebab {
-      font-size: 1.7rem;
-      margin: 50px auto 0;
-      padding: 20px;
-      background: rgba(255,87,34,0.15);
-      border-radius: 20px;
-      border: 2px dashed #ff5722;
-      color: #c62828;
+      font-size: 1.8rem;
+      margin: 60px auto 0;
+      padding: 22px;
+      background: rgba(255,87,34,0.18);
+      border-radius: 24px;
+      border: 3px dashed #ff5722;
+      color: #b71c1c;
       font-weight: bold;
-      max-width: 580px;
+      max-width: 600px;
+      animation: pulse-kebab 3s infinite;
     }
 
-    /* wolne spadające serduszka */
+    @keyframes pulse-kebab {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    /* spadające serduszka – wolne */
     .hearts {
       position: fixed;
       inset: 0;
@@ -84,21 +92,28 @@
 
     .heart {
       position: absolute;
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       user-select: none;
       animation: fall linear forwards;
       animation-timing-function: ease-in-out;
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-25vh) rotate(0deg);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(140vh) rotate(720deg);
-        opacity: 0;
-      }
+      0%   { transform: translateY(-25vh) rotate(0deg);  opacity: 0.9; }
+      100% { transform: translateY(140vh) rotate(720deg); opacity: 0;   }
+    }
+
+    /* serduszka przy kursorze */
+    .cursor-heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.6rem;
+      animation: cursorFade 1.4s forwards;
+      z-index: 20;
+    }
+
+    @keyframes cursorFade {
+      to { opacity: 0; transform: translateY(-40px) scale(0.7); }
     }
   </style>
 </head>
@@ -107,9 +122,9 @@
 <div class="hearts" id="hearts"></div>
 
 <div class="container">
-  <h1>Karolina <span class="serce">❤️</span></h1>
+  <h1>Karolina</h1>
   
-  <div class="subtitle">kocham Cię whuj ❤️</div>
+  <div id="kocham"></div>
 
   <div class="wiersz">
 Karolino,
@@ -161,8 +176,13 @@ Na zawsze.
   </div>
 </div>
 
+<!-- cichy dźwięk bicia serca (opcjonalny) -->
+<audio id="heartbeat" loop volume="0.08">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-heart-beat-2712.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-// wolne, spokojne serduszka
+// wolne spadające serduszka
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
@@ -173,8 +193,8 @@ function createHeart() {
   heart.style.left = Math.random() * 100 + 'vw';
   heart.style.top = '-25vh';
 
-  const size = Math.random() * 2 + 1.6;          // 1.6–3.6 rem
-  const duration = Math.random() * 14 + 18;      // 18–32 sekundy
+  const size = Math.random() * 2 + 1.6;
+  const duration = Math.random() * 14 + 18; // 18–32 sekundy
   const sway = Math.random() * 60 - 30;
 
   heart.style.fontSize = size + 'rem';
@@ -182,12 +202,41 @@ function createHeart() {
   heart.style.transform = `translateX(${sway}px)`;
 
   document.getElementById('hearts').appendChild(heart);
-
   setTimeout(() => heart.remove(), duration * 1000 + 5000);
 }
 
-// tworzymy nowe serduszko rzadziej → spokojniejszy klimat
-setInterval(createHeart, 800 + Math.random() * 800); // co 0.8–1.6 s
+setInterval(createHeart, 800 + Math.random() * 800);
+
+// serduszka przy kursorze
+document.addEventListener('mousemove', e => {
+  if (Math.random() < 0.12) { // nie za często
+    const h = document.createElement('div');
+    h.className = 'cursor-heart';
+    h.innerHTML = '❤️';
+    h.style.left = e.pageX + 'px';
+    h.style.top = e.pageY + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1400);
+  }
+});
+
+// pisanie "Kocham Cię" literka po literce
+const kochamTekst = "Kocham Cię, Karolino ♡";
+let i = 0;
+function piszKocham() {
+  if (i < kochamTekst.length) {
+    document.getElementById('kocham').innerHTML += kochamTekst.charAt(i);
+    i++;
+    setTimeout(piszKocham, 100);
+  }
+}
+setTimeout(piszKocham, 800);
+
+// cichy heartbeat po 3 sekundach
+setTimeout(() => {
+  const audio = document.getElementById('heartbeat');
+  audio.play().catch(() => {}); // catch bo niektóre przeglądarki blokują autoplay
+}, 3000);
 </script>
 
 </body>
