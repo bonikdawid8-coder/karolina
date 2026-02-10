@@ -12,33 +12,66 @@
       font-family: Georgia, serif;
       color: #4a2c3b;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .container {
       max-width: 740px;
-      margin: 50px auto;
+      margin: 30px;
       padding: 45px 35px;
       background: rgba(255, 255, 255, 0.9);
       border-radius: 28px;
       box-shadow: 0 14px 45px rgba(0,0,0,0.13);
       border: 2px solid rgba(233, 30, 99, 0.3);
+      text-align: center;
       position: relative;
       z-index: 10;
-      text-align: center;
     }
 
     h1 {
       color: #b71c1c;
       font-size: 3.8rem;
-      margin: 0 0 15px;
+      margin: 0 0 20px;
       font-weight: 700;
     }
 
     .subtitle {
       color: #e91e63;
       font-size: 1.7rem;
-      margin: 0 0 35px;
+      margin: 0 0 40px;
       font-style: italic;
+    }
+
+    #reveal-btn {
+      font-size: 1.4rem;
+      padding: 16px 40px;
+      background: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(233,30,99,0.4);
+      transition: all 0.3s;
+      margin: 30px 0;
+    }
+
+    #reveal-btn:hover {
+      background: #c2185b;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(233,30,99,0.5);
+    }
+
+    #content {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    #content.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .wiersz {
@@ -99,81 +132,85 @@
 
 <div class="container">
   <h1>Karolina <span class="serce">💗</span></h1>
-  <div class="subtitle">Moja jedyna, chujowa i najpiękniejsza ❤️</div>
+  <div class="subtitle">Dla Ciebie... kliknij, jeśli jesteś gotowa ❤️</div>
 
-  <div class="wiersz">
+  <button id="reveal-btn">Odkryj wiersz</button>
+
+  <div id="content">
+    <div class="wiersz">
 Karolino,
-
-kocham Cię tak bardzo, że aż mnie wkurwia jak pięknie to brzmi w głowie.  
-Bo serio – patrzę na Ciebie rano, z tą Twoją miną „gdzie ja jestem, kurwa”,  
+kocham Cię tak bardzo, że aż mnie wkurwia jak pięknie to brzmi w głowie.
+Bo serio – patrzę na Ciebie rano, z tą Twoją miną „gdzie ja jestem, kurwa”,
 i myślę: no nieźle, wygrałem życie na loterii z nagrodą w postaci Ciebie i Twojego porannego beknięcia.
 
-Jesteś jak mem, który zawsze mnie rozbawi,  
-tylko że ten mem ma zapach Twoich włosów i potrafi mnie przytulić tak,  
-że zapominam, jak się nazywam przez 17 sekund.  
-<span class="serce">💖</span> A potem wracasz do rzeczywistości i mówisz:  
-„Dawid, oddaj pilota, bo znowu oglądasz te swoje śmieszne koty” –  
+Jesteś jak mem, który zawsze mnie rozbawi,
+tylko że ten mem ma zapach Twoich włosów i potrafi mnie przytulić tak,
+że zapominam, jak się nazywam przez 17 sekund.
+<span class="serce">💖</span> A potem wracasz do rzeczywistości i mówisz:
+„Dawid, oddaj pilota, bo znowu oglądasz te swoje śmieszne koty” –
 i nawet to jest zajebiste.
 
-Nie będę Ci obiecywał księżyca, bo po co komu księżyc, jak jest zimny i daleko.  
-Obiecuję za to:  
-– zawsze zostawiać Ci ostatnią kanapkę z Nutellą (nawet jak ukradnę kęs),  
-– udawać, że nie słyszę jak chrapiesz (chociaż słyszę i to jest urocze),  
-– nosić Cię na rękach przez próg… no dobra, przez próg Biedry, bo dalej bym padł,  
+Nie będę Ci obiecywał księżyca, bo po co komu księżyc, jak jest zimny i daleko.
+Obiecuję za to:
+– zawsze zostawiać Ci ostatnią kanapkę z Nutellą (nawet jak ukradnę kęs),
+– udawać, że nie słyszę jak chrapiesz (chociaż słyszę i to jest urocze),
+– nosić Cię na rękach przez próg… no dobra, przez próg Biedry, bo dalej bym padł,
 – i kochać Cię nawet wtedy, jak będziesz miała rację, a ja będę uparty jak osioł.
 
-Bo Ty jesteś moim największym fuckupem i jednocześnie najlepszą decyzją.  
-Gdybym mógł cofnąć czas, to i tak bym Cię wybrał –  
-nawet wiedząc, że będziesz kraść moją stronę kołdry,  
-że będziesz płakać na reklamach pieluch i śmiać się z moich sucharów.  
+Bo Ty jesteś moim największym fuckupem i jednocześnie najlepszą decyzją.
+Gdybym mógł cofnąć czas, to i tak bym Cię wybrał –
+nawet wiedząc, że będziesz kraść moją stronę kołdry,
+że będziesz płakać na reklamach pieluch i śmiać się z moich sucharów.
 
-Kocham Cię romantycznie do granic debilizmu:  
-chciałbym być Twoim telefonem, żebyś mnie dotykała non stop,  
-Twoim ulubionym kubkiem, żebyś mnie trzymała w dłoniach rano,  
-Twoim playlistą na Spotify, żeby grać Ci w głowie cały dzień.  
+Kocham Cię romantycznie do granic debilizmu:
+chciałbym być Twoim telefonem, żebyś mnie dotykała non stop,
+Twoim ulubionym kubkiem, żebyś mnie trzymała w dłoniach rano,
+Twoim playlistą na Spotify, żeby grać Ci w głowie cały dzień.
 <span class="serce">🩷</span>
 
-Karolina – jesteś moją najpiękniejszą wpadką,  
-moim najlepszym kacem po miłości,  
-moim „kurwa, jak ja ją kocham” o 4:37 nad ranem.  
+Karolina – jesteś moją najpiękniejszą wpadką,
+moim najlepszym kacem po miłości,
+moim „kurwa, jak ja ją kocham” o 4:37 nad ranem.
 
-I nie przestanę tego mówić, nawet jak będziesz udawać, że Cię to wkurwia.  
+I nie przestanę tego mówić, nawet jak będziesz udawać, że Cię to wkurwia.
 
-Bo kocham Cię.  
-WHUJ.  
-Na maksa.  
-Na zawsze.  
+Bo kocham Cię.
+WHUJ.
+Na maksa.
+Na zawsze.
 <span class="serce">💋</span> Twój debil nr 1.
 
 <div class="kebab-line">
 A teraz kup mi kebaba mieszany mieszany <3
 </div>
+    </div>
   </div>
 </div>
 
 <script>
-// Spadające serduszka (bez zmian)
+// Spadające serduszka
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
   heart.innerHTML = ['❤️','💞','💕','🩷','💘','💝','💗'][Math.floor(Math.random()*7)];
-  
   heart.style.left = Math.random() * 98 + 'vw';
   heart.style.top = '-15vh';
-  
   const duration = Math.random() * 7 + 9;
   const size = Math.random() * 1.4 + 1;
   heart.style.fontSize = size + 'rem';
   heart.style.animationDuration = duration + 's';
-  
   heart.style.transform = `translateX(${Math.random() * 60 - 30}px)`;
-  
   document.getElementById('hearts').appendChild(heart);
-  
   setTimeout(() => heart.remove(), duration * 1000 + 1000);
 }
-
 setInterval(createHeart, Math.random() * 400 + 250);
+
+// Przycisk + odkrywanie treści
+document.getElementById('reveal-btn').addEventListener('click', function() {
+  const content = document.getElementById('content');
+  content.classList.add('visible');
+  this.style.display = 'none'; // chowamy przycisk po kliknięciu
+});
 </script>
 
 </body>
