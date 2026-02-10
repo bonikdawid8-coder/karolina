@@ -3,126 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Karolina – moja ulubiona katastrofa ♡</title>
+  <title>Dla Karoliny ♡</title>
   <style>
     body {
       margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #fff0f5, #ffe4e9, #ffccd5);
+      height: 100vh;
+      background: #ffffff;
       font-family: Georgia, serif;
-      color: #4a2c3b;
-      position: relative;
+      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 1.8s ease;
+    }
+
+    body.revealed {
+      background: linear-gradient(135deg, #fff0f5, #ffe4e9, #ffccd5);
     }
 
     .container {
-      max-width: 740px;
-      margin: 30px;
-      padding: 45px 35px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 28px;
-      box-shadow: 0 14px 45px rgba(0,0,0,0.13);
-      border: 2px solid rgba(233, 30, 99, 0.3);
+      max-width: 760px;
+      padding: 50px 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 32px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
       text-align: center;
       position: relative;
       z-index: 10;
+      transition: all 1.2s ease;
     }
 
-    h1 {
+    h1.big-name {
+      font-size: 6rem;
+      margin: 0 0 30px;
+      font-weight: 800;
+      color: #222;
+      letter-spacing: -3px;
+      transition: color 1.8s ease;
+    }
+
+    body.revealed h1.big-name {
       color: #b71c1c;
-      font-size: 3.8rem;
-      margin: 0 0 20px;
-      font-weight: 700;
-    }
-
-    .subtitle {
-      color: #e91e63;
-      font-size: 1.7rem;
-      margin: 0 0 40px;
-      font-style: italic;
     }
 
     #reveal-btn {
-      font-size: 1.4rem;
-      padding: 16px 40px;
+      font-size: 1.5rem;
+      padding: 18px 60px;
       background: #e91e63;
       color: white;
       border: none;
-      border-radius: 50px;
+      border-radius: 60px;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(233,30,99,0.4);
-      transition: all 0.3s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transition: all 0.4s;
       margin: 30px 0;
     }
 
     #reveal-btn:hover {
-      background: #c2185b;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(233,30,99,0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(233,30,99,0.5);
     }
 
-    #content {
+    #full-content {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
+      transform: translateY(50px);
+      transition: opacity 1.6s ease-out 0.3s, transform 1.6s ease-out 0.3s;
+      pointer-events: none;
     }
 
-    #content.visible {
+    #full-content.visible {
       opacity: 1;
       transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .subtitle {
+      color: #c2185b;
+      font-size: 1.9rem;
+      margin: 0 0 40px;
+      font-style: italic;
     }
 
     .wiersz {
-      font-size: 1.35rem;
-      line-height: 2.0;
+      font-size: 1.38rem;
+      line-height: 2.05;
       white-space: pre-line;
       color: #222;
+      text-align: left;
+      max-width: 680px;
+      margin: 0 auto 30px;
     }
 
     .serce {
       color: #d81b60;
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       margin: 0 8px;
-      animation: beat 1.4s infinite;
+      animation: beat 1.5s infinite;
     }
 
     @keyframes beat {
       0%, 100% { transform: scale(1); }
-      40% { transform: scale(1.25); }
+      40% { transform: scale(1.28); }
     }
 
     .kebab-line {
-      font-size: 1.5rem;
-      margin-top: 35px;
-      padding: 15px;
-      background: rgba(255, 87, 34, 0.15);
-      border-radius: 16px;
+      font-size: 1.6rem;
+      margin: 40px auto 0;
+      padding: 18px;
+      background: rgba(255, 87, 34, 0.18);
+      border-radius: 20px;
       border: 2px dashed #ff5722;
       color: #d32f2f;
       font-weight: bold;
+      max-width: 520px;
     }
 
-    /* Spadające serduszka */
+    /* Spadające serduszka – ukryte na starcie */
     .hearts {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 5;
-      overflow: hidden;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    body.revealed .hearts {
+      opacity: 1;
     }
 
     .heart {
       position: absolute;
-      font-size: 2rem;
+      font-size: 2.2rem;
       user-select: none;
       animation: fall linear forwards;
     }
 
     @keyframes fall {
-      0% { transform: translateY(-15vh) rotate(0deg); opacity: 0.95; }
-      100% { transform: translateY(115vh) rotate(1080deg); opacity: 0; }
+      0% { transform: translateY(-20vh) rotate(0deg); opacity: 0.9; }
+      100% { transform: translateY(120vh) rotate(1440deg); opacity: 0; }
     }
   </style>
 </head>
@@ -131,12 +152,13 @@
 <div class="hearts" id="hearts"></div>
 
 <div class="container">
-  <h1>Karolina <span class="serce">💗</span></h1>
-  <div class="subtitle">Dla Ciebie... kliknij, jeśli jesteś gotowa ❤️</div>
+  <h1 class="big-name">Karolina</h1>
 
-  <button id="reveal-btn">Odkryj wiersz</button>
+  <button id="reveal-btn">Otwórz ♡</button>
 
-  <div id="content">
+  <div id="full-content">
+    <div class="subtitle">...to jest tylko dla Ciebie ❤️</div>
+
     <div class="wiersz">
 Karolino,
 kocham Cię tak bardzo, że aż mnie wkurwia jak pięknie to brzmi w głowie.
@@ -188,28 +210,36 @@ A teraz kup mi kebaba mieszany mieszany <3
 </div>
 
 <script>
-// Spadające serduszka
+// Spadające serduszka (startują dopiero po odkryciu)
 function createHeart() {
   const heart = document.createElement('div');
   heart.className = 'heart';
   heart.innerHTML = ['❤️','💞','💕','🩷','💘','💝','💗'][Math.floor(Math.random()*7)];
   heart.style.left = Math.random() * 98 + 'vw';
-  heart.style.top = '-15vh';
-  const duration = Math.random() * 7 + 9;
-  const size = Math.random() * 1.4 + 1;
+  heart.style.top = '-20vh';
+  const duration = Math.random() * 8 + 10;
+  const size = Math.random() * 1.5 + 1.2;
   heart.style.fontSize = size + 'rem';
   heart.style.animationDuration = duration + 's';
-  heart.style.transform = `translateX(${Math.random() * 60 - 30}px)`;
+  heart.style.transform = `translateX(${Math.random() * 70 - 35}px)`;
   document.getElementById('hearts').appendChild(heart);
-  setTimeout(() => heart.remove(), duration * 1000 + 1000);
+  setTimeout(() => heart.remove(), duration * 1000 + 2000);
 }
-setInterval(createHeart, Math.random() * 400 + 250);
 
-// Przycisk + odkrywanie treści
+// Przycisk – zmienia wszystko
 document.getElementById('reveal-btn').addEventListener('click', function() {
-  const content = document.getElementById('content');
-  content.classList.add('visible');
-  this.style.display = 'none'; // chowamy przycisk po kliknięciu
+  document.body.classList.add('revealed');
+  document.getElementById('full-content').classList.add('visible');
+  
+  // chowamy przycisk
+  this.style.opacity = '0';
+  this.style.pointerEvents = 'none';
+  setTimeout(() => this.remove(), 1000);
+
+  // startujemy serduszka po 0.6 s
+  setTimeout(() => {
+    setInterval(createHeart, Math.random() * 350 + 200);
+  }, 600);
 });
 </script>
 
