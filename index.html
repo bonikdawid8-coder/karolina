@@ -9,40 +9,54 @@
       margin: 0;
       min-height: 100vh;
       font-family: Georgia, serif;
-      color: #222;
-      background: linear-gradient(135deg, #fff0f5, #ffe4e9, #ffccd5);
+      color: #fff;
+      background: #000; /* na wszelki wypadek ciemne tło pod zdjęciem */
+      position: relative;
       overflow-x: hidden;
     }
 
+    /* Zdjęcie jako tło całej strony – pełne, wyraźne */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('karolina.jpg') center/cover no-repeat;   /* ← ZMIEŃ NA SWOJĄ NAZWĘ PLIKU */
+      z-index: -2;
+      pointer-events: none;
+    }
+
     .container {
-      max-width: 840px;
-      margin: 40px auto;
-      padding: 40px 30px;
-      background: transparent; /* bez białego tła */
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 40px 25px;
+      background: rgba(0,0,0,0.45); /* półprzezroczyste czarne tło pod tekstem */
+      border-radius: 24px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       text-align: center;
       position: relative;
       z-index: 10;
     }
 
     h1 {
-      color: #b71c1c;
-      font-size: 5.2rem;
-      margin: 0 0 20px;
-      font-weight: 800;
-      letter-spacing: -2px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      color: #ff69b4;
+      font-size: clamp(3.5rem, 10vw, 5.8rem);
+      margin: 0 0 25px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.7);
     }
 
     #kocham-lajzo {
-      font-size: 3.2rem;
-      color: #c2185b;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      color: #ff1493;
       margin: 20px 0 50px;
       font-style: italic;
-      min-height: 4.5rem;
+      min-height: 5rem;
       opacity: 0;
       transition: opacity 1.8s ease;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
 
     #kocham-lajzo.visible {
@@ -50,52 +64,37 @@
     }
 
     .wiersz-ramka {
-      background: url('karolina.jpg') center/cover no-repeat;   /* ← ZMIEŃ NA SWOJĄ NAZWĘ ZDJĘCIA */
-      border: 5px solid transparent;
-      border-image: linear-gradient(to right, #ffb6c1, #ff69b4, #c71585) 1;
-      border-radius: 22px;
-      padding: 45px 50px;
+      background: rgba(0,0,0,0.55);
+      border: 4px solid rgba(255,105,180,0.6);
+      border-radius: 20px;
+      padding: 40px 45px;
       margin: 0 auto 50px;
-      max-width: 760px;
-      box-shadow: 
-        inset 0 0 40px rgba(0,0,0,0.35),
-        0 10px 40px rgba(0,0,0,0.25);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .wiersz-ramka::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.15); /* delikatne przyciemnienie, żeby tekst był czytelny */
-      z-index: 0;
-      pointer-events: none;
+      max-width: 780px;
+      box-shadow: inset 0 0 30px rgba(255,105,180,0.3);
+      backdrop-filter: blur(4px);
     }
 
     .wiersz {
-      font-size: 1.44rem;
-      line-height: 2.18;
+      font-size: clamp(1.1rem, 3.5vw, 1.44rem);
+      line-height: 2.1;
       white-space: pre-wrap;
       margin: 0;
-      position: relative;
-      z-index: 2;
       text-align: left;
-      color: white;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
     }
 
     .kebab {
       font-size: 1.8rem;
-      margin: 60px auto 0;
-      padding: 22px;
-      background: rgba(255,87,34,0.18);
-      border-radius: 24px;
-      border: 3px dashed #ff5722;
-      color: #b71c1c;
+      margin: 50px auto 0;
+      padding: 20px;
+      background: rgba(255,87,34,0.25);
+      border-radius: 20px;
+      border: 3px dashed #ff4500;
+      color: #fff;
       font-weight: bold;
       max-width: 600px;
       backdrop-filter: blur(6px);
+      text-shadow: 0 1px 4px #000;
     }
 
     /* Spadające serca */
@@ -120,10 +119,10 @@
     }
 
     @media (max-width: 600px) {
-      .container { margin: 20px; padding: 30px 20px; }
-      h1 { font-size: 4rem; }
-      .wiersz-ramka { padding: 35px 30px; }
-      .wiersz { font-size: 1.28rem; line-height: 1.95; }
+      .container { margin: 15px; padding: 30px 20px; border-radius: 20px; }
+      h1 { font-size: 3.8rem; }
+      .wiersz-ramka { padding: 30px 25px; }
+      .wiersz { font-size: 1.28rem; line-height: 1.9; }
     }
   </style>
 </head>
