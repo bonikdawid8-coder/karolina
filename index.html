@@ -9,13 +9,13 @@
       margin: 0;
       min-height: 100vh;
       font-family: Georgia, serif;
-      color: #fff;
-      background: #000; /* na wszelki wypadek ciemne tło pod zdjęciem */
+      color: white;
+      background: #000;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* Zdjęcie jako tło całej strony – pełne, wyraźne */
+    /* Zdjęcie jako tło całej strony – pełne, wyraźne, bez przyciemniania */
     body::before {
       content: "";
       position: fixed;
@@ -26,37 +26,33 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 880px;
       margin: 30px auto;
       padding: 40px 25px;
-      background: rgba(0,0,0,0.45); /* półprzezroczyste czarne tło pod tekstem */
-      border-radius: 24px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: transparent;
       text-align: center;
       position: relative;
       z-index: 10;
     }
 
     h1 {
-      color: #ff69b4;
-      font-size: clamp(3.5rem, 10vw, 5.8rem);
+      font-size: clamp(3.8rem, 12vw, 5.8rem);
       margin: 0 0 25px;
       font-weight: 900;
       letter-spacing: -1px;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.7);
+      text-shadow: 0 4px 16px rgba(0,0,0,0.9);
     }
 
     #kocham-lajzo {
-      font-size: clamp(2rem, 6vw, 3.6rem);
-      color: #ff1493;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      color: #ff69b4;
       margin: 20px 0 50px;
       font-style: italic;
       min-height: 5rem;
       opacity: 0;
       transition: opacity 1.8s ease;
       letter-spacing: 1.5px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-shadow: 0 3px 12px rgba(0,0,0,0.9);
     }
 
     #kocham-lajzo.visible {
@@ -64,23 +60,23 @@
     }
 
     .wiersz-ramka {
-      background: rgba(0,0,0,0.55);
-      border: 4px solid rgba(255,105,180,0.6);
+      background: rgba(0,0,0,0.35); /* delikatny półprzezroczysty pasek pod wierszem */
+      border: 4px solid rgba(255,105,180,0.7);
       border-radius: 20px;
       padding: 40px 45px;
       margin: 0 auto 50px;
       max-width: 780px;
-      box-shadow: inset 0 0 30px rgba(255,105,180,0.3);
       backdrop-filter: blur(4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
 
     .wiersz {
-      font-size: clamp(1.1rem, 3.5vw, 1.44rem);
+      font-size: clamp(1.15rem, 3.8vw, 1.44rem);
       line-height: 2.1;
       white-space: pre-wrap;
       margin: 0;
       text-align: left;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.95);
     }
 
     .kebab {
@@ -90,11 +86,11 @@
       background: rgba(255,87,34,0.25);
       border-radius: 20px;
       border: 3px dashed #ff4500;
-      color: #fff;
+      color: white;
       font-weight: bold;
       max-width: 600px;
       backdrop-filter: blur(6px);
-      text-shadow: 0 1px 4px #000;
+      text-shadow: 0 2px 6px #000;
     }
 
     /* Spadające serca */
@@ -119,7 +115,7 @@
     }
 
     @media (max-width: 600px) {
-      .container { margin: 15px; padding: 30px 20px; border-radius: 20px; }
+      .container { margin: 15px; padding: 30px 20px; }
       h1 { font-size: 3.8rem; }
       .wiersz-ramka { padding: 30px 25px; }
       .wiersz { font-size: 1.28rem; line-height: 1.9; }
